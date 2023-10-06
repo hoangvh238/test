@@ -43,19 +43,6 @@ const Home: NextPage = () => {
   } = usePosts();
   const { communityStateValue } = useCommunityData();
 
-  const buildUserHomeFeed = async () => {
-    try {
-      const postData = await getAllPost();
-
-      setPostStateValue((prev) => ({
-        ...prev,
-        posts: postData.data as Post[],
-      }));
-    } catch (error) {
-      console.error("Building Home Error", error);
-    }
-  };
-
   const buildNoUserHomeFeed = async () => {
     setLoading(true);
     try {
@@ -77,10 +64,11 @@ const Home: NextPage = () => {
   // useEffect(() => {
   //   if (communityStateValue.snippetsFetched) buildNoUserHomeFeed();
   // }, [communityStateValue.snippetsFetched]);
-
   useEffect(() => {
-   buildNoUserHomeFeed();
+    buildNoUserHomeFeed();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
 
   // useEffect(() => {
     
