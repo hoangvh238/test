@@ -117,15 +117,7 @@ console.log(postStateValue);
 
                 return (
                   
-                  <PostItem
-                    key={index}
-                    post={post}
-                    userIsCreator={user?.userName === post.author}
-                    userVoteValue={currentVote?.status}
-                    onVote={onVote}
-                    onSelectPost={onSelectPost}
-                    onDeletePost={onDeletePost} votesAmt={votesAmt} commentAmt={post.comments.length}             
-                       />
+                 <></>
                 )
               })}
             </Stack>
