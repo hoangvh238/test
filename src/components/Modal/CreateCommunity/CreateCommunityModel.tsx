@@ -30,7 +30,7 @@ import { HiLockClosed } from "react-icons/hi";
 
 import { auth, firestore } from "../../../firebase/clientApp";
 import useDirectory from "../../../hooks/useDirectory";
-import TagForm from "./hashtag/TagForm";
+
 
 type CreateCommunityModelProps = {
   open: boolean;
@@ -186,9 +186,7 @@ const CreateCommunityModel: React.FC<CreateCommunityModelProps> = ({
                   <div>
 
                   </div>
-                  <TagForm max={10} message="Input your category content in groups" name="Category" form={"category"}></TagForm>
-        <TagForm max={1} message="Hashtag helping people find your group" name="Hashtag" form={"hashtag"}></TagForm>
-        
+               
                   <div>
                     <h3 className="font-[700] text-[24px] ">Depcripstion</h3>
                     <p className='font-[300] text-[14px] pb-2'>

@@ -6,9 +6,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 import { Post, Like } from "../../atoms/PostAtom";
 import { auth, firestore } from "../../firebase/clientApp";
-import useCommunityData from "../../hooks/useCommunityData";
+
 import usePosts from "../../hooks/usePosts";
-import Recommendation from "../Community/Recommendation";
+
 import PageContent from "../Layout/PageContent";
 import PostItem from "../posts/PostItem";
 import PostLoader from "../posts/PostLoader";
@@ -18,35 +18,22 @@ import ProfileTopBar from "./ProfileTopBar";
 import {User} from "@/atoms/userAtom"
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import userProfile from "@/hooks/userProfile";
+
 type Props = {
   slug : string | undefined
 };
 
 function MainContainer({slug}:Props) {
-  const {
-    user,
-    setUser,
-    onLoad
-  } = userProfile();
+
   const router = useRouter();
   const slugdata = router.query.slug?.toString();
   const currenUser = useSelector((state:RootState)=> state.userInfor.currentUser);
 
-  useEffect(()=>{
-      if(slugdata) onLoad(slugdata)
-  },[slugdata])
+
 
 
   const [loading, setLoading] = useState(false);
-  const {
-    postStateValue,
-    setPostStateValue,
-    onDeletePost,
-    onSelectPost,
-    onVote,
-  } = usePosts();
-  const { communityStateValue } = useCommunityData();
+ 
 
   //const communityStateValue = useRecoilValue(CommunityState);
 
@@ -164,36 +151,14 @@ function MainContainer({slug}:Props) {
         ) : (
           <Stack>
             <>
-              {postStateValue.posts.length > 0 ? (
-                <>
-                  {postStateValue.posts.map((post) => (
-                    // <PostItem
-                    //   key={post.id}
-                    //   post={post}
-                    //   onVote={onVote}
-                    //   onDeletePost={onDeletePost}
-                    //   userVoteValue={
-                    //     postStateValue.postVotes.find(
-                    //       (item) => item.postId === post.id
-                    //     )?.voteValue
-                    //   }
-                    //   userIsCreator={user?.uid === post.creatorId}
-                    //   onSelectPost={onSelectPost}
-                    //   homePage
-                    // />
-                    <></>
-                  ))}
-                </>
-              ) : (
-                <NoPost />
-              )}
+              
+                  
             </>
           </Stack>
         )}
       </>
       <Stack spacing={5}>
-        {currenUser?.userName && <ProfileSide userData={user} />}
-        <Recommendation />
+       
       </Stack>
     </PageContent>
   );

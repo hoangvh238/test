@@ -36,18 +36,7 @@ const useDirectory = () => {
   useEffect(() => {
     const { currentCommunity } = communityStateValue;
 
-    if (currentCommunity) {
-      setDirectoryState((prev) => ({
-        ...prev,
-        selectedMenuItem: {
-          displayText: `r/${currentCommunity.id}`,
-          link: `/r/${currentCommunity.id}`,
-          imageURL: currentCommunity.imageURL,
-          icon: FaReddit,
-          iconColor: "blue.500",
-        },
-      }));
-    }
+   
   }, [communityStateValue.currentCommunity]);
 
   return { directoryState, toggleMenuOpen, onSelectMenuItem };

@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 
 import { Community } from "../../atoms/CommunitiesAtom";
-import ConversationItem from "./ConversationItem";
+
 
 type Props = {
   chatUsers: Community[];
@@ -15,9 +15,7 @@ function ConversationsList({ chatUsers }: Props) {
       height="100%"
       overflow="scroll"
     >
-      {chatUsers.map((user) => (
-        <ConversationItem key={user.id} user={user} />
-      ))}
+     
     </Box>
   );
 }

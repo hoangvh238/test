@@ -25,20 +25,7 @@ const usePosts = () => {
     event.stopPropagation();
     // check user ?
 
-    if (!(await user).userName) {
-      setAuthModalState({ open: true, view: "login" });
-      return -1;
-    }
-
-    try {
-      if(vote==1)
-      await like(post, (await user).userName);
-      else  await disLike(post, (await user).userName);
-      return 1;
-    } catch (error) {
-      return -1;
-    }
-  };
+    
 
   const onSelectPost = (post: Post) => {
     setPostStateValue((prev) => ({
@@ -87,20 +74,7 @@ const usePosts = () => {
     // }));
   };
 
-  useEffect(() => {
-    if (!user || !currentCommunity?.id) return;
-    getCommunityPostVotes(currentCommunity?.id);
-  }, [!user, currentCommunity]);
 
-  useEffect(() => {
-    if (!user) {
-      // if check user ?
-      setPostStateValue((prev) => ({
-        ...prev,
-        postVotes: [],
-      }));
-    }
-  }, [user]);
 
   return {
     postStateValue,
@@ -110,5 +84,6 @@ const usePosts = () => {
     onDeletePost,
   };
 };
+}
 
-export default usePosts;
+export default usePosts
