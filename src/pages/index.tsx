@@ -17,12 +17,10 @@ import { Post, Like } from "../atoms/PostAtom";
 import CreatePostLink from "../components/Community/CreatePostLink";
 import PersonalHome from "../components/Community/PersonalHome";
 import Premium from "../components/Community/Premium";
-import Recommendation from "../components/Community/Recommendation";
 import PageContent from "../components/Layout/PageContent";
 import PostItem from "../components/posts/PostItem";
 import PostLoader from "../components/posts/PostLoader";
 import { auth, firestore } from "../firebase/clientApp";
-import useCommunityData from "../hooks/useCommunityData";
 import usePosts from "../hooks/usePosts";
 import { getAllPost } from "../../apis/posts";
 import PostRead from "@/components/Post/Post";
@@ -34,28 +32,9 @@ const Home: NextPage = () => {
   console.log(user);
   
   const [loading, setLoading] = useState(false);
-  const {
-    postStateValue,
-    setPostStateValue,
-    onDeletePost,
-    onSelectPost,
-    onVote,
-  } = usePosts();
-  const { communityStateValue } = useCommunityData();
 
-  const buildNoUserHomeFeed = async () => {
-    setLoading(true);
-    try {
-      const postData = await getAllPost();
-      setPostStateValue((prev) => ({
-        ...prev,
-        posts: postData.data as Post[],
-      }));
-    } catch (error) {
-      console.error("BuildNoUserHome", error);
-    }
-    setLoading(false);
-  };
+
+ 
 
   const getUserPostVotes = async () => {
     // Implement this function if needed
@@ -64,10 +43,7 @@ const Home: NextPage = () => {
   // useEffect(() => {
   //   if (communityStateValue.snippetsFetched) buildNoUserHomeFeed();
   // }, [communityStateValue.snippetsFetched]);
-  useEffect(() => {
-    buildNoUserHomeFeed();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   
 
   // useEffect(() => {
@@ -83,7 +59,7 @@ const Home: NextPage = () => {
   // }, [user, postStateValue.posts]);
 
 
-console.log(postStateValue);
+
 
 
   return (
@@ -104,27 +80,12 @@ console.log(postStateValue);
             <PostLoader />
           ) : (
             <Stack>
-              {postStateValue.posts.map((post, index) => {
-                // Check if post.postVotes is defined before using reduce
-                const votesAmt = post.likes ? post.likes.reduce((acc, vote) => {
-                  if (vote.status === 1) return acc + 1;
-                  if (vote.status === -1) return acc - 1;
-                  return acc;
-                }, 0) : 0;
-
-                const currentVote = post.likes?.find((like) => like.auth === user.userName);
-
-
-                return (
-                  
-                 <></>
-                )
-              })}
+              
             </Stack>
           )}
         </>
         <Stack spacing={5}>
-          <Recommendation />
+  
           <Premium />
           <PersonalHome />
         </Stack>
